@@ -25,8 +25,7 @@ import java.io.File;
 public class CompactArmour extends ModBase {
 
     public static final String ModName = "CompactArmour"; //Human readable name
-    @Deprecated
-    public static final String ModID = ModName;  //modid (usually lowercase)
+    public static final String ModID = "compactarmour";  //modid (usually lowercase)
 
     @SidedProxy(clientSide = "elec332.compactarmour.proxies.ClientProxy", serverSide = "elec332.compactarmour.proxies.CommonProxy")
     public static CommonProxy proxy;
