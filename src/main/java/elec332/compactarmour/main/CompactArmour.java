@@ -1,60 +1,57 @@
-package elec332.basemod.main;
+package elec332.compactarmour.main;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import elec332.basemod.init.BlockRegister;
-import elec332.basemod.init.CommandRegister;
-import elec332.basemod.init.ItemRegister;
+import elec332.compactarmour.ArmourStorageItem;
+import elec332.compactarmour.SwitchSetsPacket;
+import elec332.compactarmour.proxies.CommonProxy;
 import elec332.core.helper.FileHelper;
 import elec332.core.helper.MCModInfo;
+import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
-import elec332.basemod.proxies.CommonProxy;
+import elec332.core.network.NetworkHandler;
 
 import java.io.File;
 
 /**
  * Created by Elec332 on 24-2-2015.
  */
-@Mod(modid = ModName.ModName, name = ModName.ModID, dependencies = modInfo.DEPENDENCIES+"@[#ELECCORE_VER#,)",
+@Mod(modid = CompactArmour.ModID, name = CompactArmour.ModName, dependencies = modInfo.DEPENDENCIES+"@[#ELECCORE_VER#,)",
         acceptedMinecraftVersions = modInfo.ACCEPTEDMCVERSIONS, useMetadata = true, canBeDeactivated = true)
-public class ModName extends ModBase {
+public class CompactArmour extends ModBase {
 
-    public static final String ModName = "YourModName"; //Human readable name
-    public static final String ModID = "yourmodid";  //modid (usually lowercase)
+    public static final String ModName = "CompactArmour"; //Human readable name
+    public static final String ModID = "compactarmour";  //modid (usually lowercase)
 
-    @SidedProxy(clientSide = "elec332.basemod.proxies.ClientProxy", serverSide = "elec332.basemod.proxies.CommonProxy")
+    @SidedProxy(clientSide = "elec332.compactarmour.proxies.ClientProxy", serverSide = "elec332.compactarmour.proxies.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance(ModID)
-    public static ModName instance;
+    public static CompactArmour instance;
+    public static NetworkHandler networkHandler;
+    public static ArmourStorageItem armourStorageItem;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         this.cfg = FileHelper.getConfigFileElec(event);
         loadConfiguration();
-        ItemRegister.instance.preInit(event);
-        BlockRegister.instance.preInit(event);
-        //setting up mod stuff
+        networkHandler = new NetworkHandler(ModInfoHelper.getModID(event));
+        networkHandler.registerServerPacket(SwitchSetsPacket.class);
+        proxy.registerKeyStuff();
 
         loadConfiguration();
-        MCModInfo.CreateMCModInfo(event, "Created by ....",
-                "mod description",
-                "website link", "logo",
-                new String[]{"authorList"});
+        MCModInfo.CreateMCModInfoElec(event, "Compact Armour Mod", "Loading URL...", "assets/elec332/logo.png", new String[]{"Elec332"});
         notifyEvent(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         loadConfiguration();
-        ItemRegister.instance.init(event);
-        BlockRegister.instance.init(event);
-        //register items/blocks
+        armourStorageItem = new ArmourStorageItem();
 
         notifyEvent(event);
     }
@@ -62,14 +59,9 @@ public class ModName extends ModBase {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event){
         loadConfiguration();
-        //Mod compat stuff
+        //Nope
 
         notifyEvent(event);
-    }
-
-    @Mod.EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
-        CommandRegister.instance.init(event);
     }
 
     File cfg;
