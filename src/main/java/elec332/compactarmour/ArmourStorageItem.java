@@ -19,6 +19,7 @@ public class ArmourStorageItem extends baseItem {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        player.swingItem();
         return SwitchHandler.Switch(itemStack, player);
     }
 }
