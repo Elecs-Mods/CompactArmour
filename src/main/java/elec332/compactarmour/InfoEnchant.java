@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class InfoEnchant extends Enchantment {
     public InfoEnchant(int ID) {
         super(ID, 2, EnumEnchantmentType.all);
-        this.setName("Information");
+        setName("Information");
     }
 
     public int getMinEnchantability(int par1) {
@@ -31,6 +31,6 @@ public class InfoEnchant extends Enchantment {
     }
 
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return this.canApply(stack);
+        return stack.getItem() instanceof ArmourStorageItem;
     }
 }

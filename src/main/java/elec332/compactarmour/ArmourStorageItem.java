@@ -32,13 +32,14 @@ public class ArmourStorageItem extends baseItem {
         return SwitchHandler.Switch(itemStack, player);
     }
 
+    @Override
     public int getItemEnchantability() {
         return 18;
     }
 
     @Override
-    public boolean isItemTool(ItemStack itemStack) {
-        return true;
+    public boolean isItemTool(ItemStack stack) {
+        return stack.getItem() instanceof ArmourStorageItem;
     }
 
     @Override
