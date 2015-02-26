@@ -5,7 +5,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import elec332.compactarmour.ArmourStorageItem;
+import elec332.compactarmour.InfoEnchant;
 import elec332.compactarmour.SwitchSetsPacket;
 import elec332.compactarmour.proxies.CommonProxy;
 import elec332.core.helper.FileHelper;
@@ -14,6 +16,11 @@ import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
 import elec332.core.modBaseUtils.modInfo;
 import elec332.core.network.NetworkHandler;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
 
 import java.io.File;
 
@@ -35,6 +42,7 @@ public class CompactArmour extends ModBase {
     public static CompactArmour instance;
     public static NetworkHandler networkHandler;
     public static ArmourStorageItem armourStorageItem;
+    public static Integer InfoEnchantID;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -43,6 +51,8 @@ public class CompactArmour extends ModBase {
         networkHandler = new NetworkHandler(ModInfoHelper.getModID(event));
         networkHandler.registerServerPacket(SwitchSetsPacket.class);
         proxy.registerKeyStuff();
+        InfoEnchantID = 78;
+        Enchantment.addToBookList(new InfoEnchant(InfoEnchantID));
 
         loadConfiguration();
         MCModInfo.CreateMCModInfoElec(event, "Compact Armour Mod", "Loading URL...", "assets/elec332/logo.png", new String[]{"Elec332"});
@@ -53,6 +63,9 @@ public class CompactArmour extends ModBase {
     public void init(FMLInitializationEvent event) {
         loadConfiguration();
         armourStorageItem = new ArmourStorageItem();
+        GameRegistry.addRecipe(new ItemStack(armourStorageItem),
+                "LSL", "SDS", "EIE", 'L', Items.leather, 'S', Items.stick, 'D', Items.diamond, 'E', Items.ender_eye, 'I', Items.iron_ingot
+        );
 
         notifyEvent(event);
     }
