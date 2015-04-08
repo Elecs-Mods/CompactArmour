@@ -1,5 +1,6 @@
-package elec332.compactarmour;
+package elec332.compactarmour.enchant;
 
+import elec332.compactarmour.items.ArmourStorageItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemBook;

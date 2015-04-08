@@ -1,7 +1,7 @@
 package elec332.compactarmour.proxies;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import elec332.compactarmour.KeyHandler;
+import elec332.compactarmour.client.KeyHandler;
 
 /**
  * Created by Elec332 on 24-2-2015.

@@ -6,29 +6,28 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import elec332.compactarmour.ArmourStorageItem;
-import elec332.compactarmour.InfoEnchant;
-import elec332.compactarmour.SwitchSetsPacket;
+import elec332.compactarmour.items.ArmourStorageItem;
+import elec332.compactarmour.enchant.InfoEnchant;
+import elec332.compactarmour.items.MultipleArmourStroageItem;
+import elec332.compactarmour.network.SwitchSetsPacket;
 import elec332.compactarmour.proxies.CommonProxy;
 import elec332.core.helper.FileHelper;
 import elec332.core.helper.MCModInfo;
 import elec332.core.helper.ModInfoHelper;
 import elec332.core.modBaseUtils.ModBase;
-import elec332.core.modBaseUtils.modInfo;
+import elec332.core.modBaseUtils.ModInfo;
 import elec332.core.network.NetworkHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
 
 import java.io.File;
 
 /**
  * Created by Elec332 on 24-2-2015.
  */
-@Mod(modid = CompactArmour.ModID, name = CompactArmour.ModName, dependencies = modInfo.DEPENDENCIES+"@[#ELECCORE_VER#,)",
-        acceptedMinecraftVersions = modInfo.ACCEPTEDMCVERSIONS, useMetadata = true, canBeDeactivated = true)
+@Mod(modid = CompactArmour.ModID, name = CompactArmour.ModName, dependencies = ModInfo.DEPENDENCIES+"@[#ELECCORE_VER#,)",
+        acceptedMinecraftVersions = ModInfo.ACCEPTEDMCVERSIONS, useMetadata = true, canBeDeactivated = true)
 public class CompactArmour extends ModBase {
 
     public static final String ModName = "CompactArmour"; //Human readable name
@@ -63,6 +62,7 @@ public class CompactArmour extends ModBase {
     public void init(FMLInitializationEvent event) {
         loadConfiguration();
         armourStorageItem = new ArmourStorageItem();
+        //new MultipleArmourStroageItem();
         GameRegistry.addRecipe(new ItemStack(armourStorageItem),
                 "LSL", "SDS", "EIE", 'L', Items.leather, 'S', Items.stick, 'D', Items.diamond, 'E', Items.ender_eye, 'I', Items.iron_ingot
         );

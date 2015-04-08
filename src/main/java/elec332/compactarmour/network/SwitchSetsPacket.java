@@ -1,7 +1,8 @@
-package elec332.compactarmour;
+package elec332.compactarmour.network;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import elec332.compactarmour.handler.SwitchHandler;
 import elec332.compactarmour.main.CompactArmour;
 import elec332.core.network.AbstractPacket;
 import net.minecraft.entity.player.InventoryPlayer;

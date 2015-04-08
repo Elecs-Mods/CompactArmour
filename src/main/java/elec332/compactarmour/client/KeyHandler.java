@@ -1,4 +1,4 @@
-package elec332.compactarmour;
+package elec332.compactarmour.client;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -6,6 +6,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import elec332.compactarmour.network.SwitchSetsPacket;
 import elec332.compactarmour.main.CompactArmour;
 import net.minecraft.client.settings.KeyBinding;
 

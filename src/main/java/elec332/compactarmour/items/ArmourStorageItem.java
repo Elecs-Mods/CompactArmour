@@ -1,8 +1,9 @@
-package elec332.compactarmour;
+package elec332.compactarmour.items;
 
+import elec332.compactarmour.handler.SwitchHandler;
 import elec332.compactarmour.main.CompactArmour;
+import elec332.core.baseclasses.item.BaseItem;
 import elec332.core.main.ElecCTab;
-import elec332.core.util.items.baseItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,13 +19,13 @@ import java.util.List;
 /**
  * Created by Elec332 on 22-2-2015.
  */
-public class ArmourStorageItem extends baseItem {
+public class ArmourStorageItem extends BaseItem {
     public ArmourStorageItem(){
         super("ArmourSwitcher", ElecCTab.ElecTab, CompactArmour.ModName);
         setMaxStackSize(1);
     }
 
-    String DATA_ID = "armourData";
+    public String DATA_ID = "armourData";
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
